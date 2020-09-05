@@ -31,6 +31,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -336,7 +337,10 @@ public class Game2048 extends JPanel {
 				  			Random random = new Random();
 				  			int choice;
 				  			int count = 1;
+				  			
 				  			while (tmp.equals(state)) {
+//				  				System.out.println();
+//				  				System.out.println(tmp);
 				  				choice = random.nextInt(4);
 				  				switch (choice) {
 				  				case 0:
@@ -361,6 +365,7 @@ public class Game2048 extends JPanel {
 				  			}
 				  			// if arrangement of tiles changed, add new tiles as needed
 				  			if (!tmp.equals(state)) {
+//				  				System.out.println("not equal");
 				  				for (int i = 0; i < NUMBER_OF_NEW_TILES; i++) {
 				  					state.addTile();
 				  				}

@@ -22,8 +22,11 @@ public class State implements GameState {
 		if (getClass() != obj.getClass())
 			return false;
 		State other = (State) obj;
-		if (!Arrays.equals(array, other.array))
+		if (!Arrays.equals(array, other.array)) {
+			
 			return false;
+		}
+
 		return true;
 	}
 
@@ -34,11 +37,17 @@ public class State implements GameState {
 	
 	public State() {
 		// TODO Auto-generated constructor stub
-		
+//		int[] state = array;
+//		array = {0, 0, 0, 0,
+//			       0, 0, 0, 0,
+//			       0, 0, 0, 0,
+//			       0, 0, 0, 0};
 	}
 	
 	public State(State currentState) {
 		// TODO Auto-generated constructor stub
+//		int[] state = currentState.array;
+		array = Arrays.copyOf(currentState.array, array.length);
 	}
 
 	@Override
@@ -71,7 +80,12 @@ public class State implements GameState {
 	public boolean addTile() {
 		// TODO Auto-generated method stub
 		Random random = new Random();
-		int random_value = (int) Math.pow(2, random.nextInt(2) + 1);
+		int random_value;
+		if (random.nextInt(10) < 9) {
+			random_value = 2;
+		} else {
+			random_value = 4;
+		}
 		int random_tile = random.nextInt(16);
 		
 		for (int i = 0; i < array.length; i++) {
@@ -197,7 +211,7 @@ public class State implements GameState {
 				prev_val = getValue(x, y);
 			}
 		}
-//		System.out.println(Arrays.toString(array));
+		System.out.println(Arrays.toString(array));
 		return points;
 	}
 
@@ -245,7 +259,7 @@ public class State implements GameState {
 				prev_val = getValue(x, y);
 			}
 		}
-//		System.out.println(Arrays.toString(array));
+		System.out.println(Arrays.toString(array));
 		return points;
 
 	}
