@@ -211,7 +211,7 @@ public class State implements GameState {
 				prev_val = getValue(x, y);
 			}
 		}
-		System.out.println(Arrays.toString(array));
+//		System.out.println(Arrays.toString(array));
 		return points;
 	}
 
@@ -259,7 +259,7 @@ public class State implements GameState {
 				prev_val = getValue(x, y);
 			}
 		}
-		System.out.println(Arrays.toString(array));
+//		System.out.println(Arrays.toString(array));
 		return points;
 
 	}

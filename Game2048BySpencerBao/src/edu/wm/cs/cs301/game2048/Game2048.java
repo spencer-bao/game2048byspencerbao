@@ -312,6 +312,8 @@ public class Game2048 extends JPanel {
 			frame.setVisible(true);
 		}
 		
+		
+		
 		if (1 == args.length) {
 			System.out.println("Operating in automated mode");
 			Game2048 game2048 = new Game2048(false);
@@ -383,6 +385,55 @@ public class Game2048 extends JPanel {
 				System.out.println("Not implemented yet: using manual operation as fallback");
 				// continue in manual mode
 				game2048.manual = true;
+				
+				int delay1 = 50;
+				
+				ActionListener taskPerformer1 = new ActionListener() {
+				      public void actionPerformed(ActionEvent evt) {
+				    	  
+				          if (game2048.gameOver()) {
+				        	  System.out.println("Actionlistener recognizes game is over");
+				        	  ((Timer)evt.getSource()).stop();
+				          }
+				          else {
+				        	GameState state = game2048.currentState;
+				  			GameState tmp = new State((State)state);
+				  			// pick a move
+				  			int count = 1;
+				  			
+				  			while (tmp.equals(state)) {
+				  				
+				  					System.out.println("Player: down, attempt: " + count);
+				  					game2048.score += state.down();
+				  					System.out.println("Player: left, attempt: " + count);
+				  					game2048.score += state.left();
+				  					count++;
+				  					break;
+//				  			
+				  			}
+				  			// if arrangement of tiles changed, add new tiles as needed
+				  			if (!tmp.equals(state)) {
+//				  				System.out.println("not equal");
+				  				for (int i = 0; i < NUMBER_OF_NEW_TILES; i++) {
+				  					state.addTile();
+				  				}
+				  			} else {
+				  				
+				  				System.out.println("Player: right, attempt: " + count);
+			  					game2048.score += state.right();
+			  					if (tmp.equals(state)) {
+				  					System.out.println("Player: up, attempt: " + count);
+				  					game2048.score += state.up();
+				  					
+				  				}
+				  			}
+				  		
+				  			frame.repaint();
+				          }
+				      }
+				  };
+				final Timer timer1 = new Timer(delay1,taskPerformer1);
+				timer1.start();
 				break;
 			default:
 				System.out.println("Unknown command line parameter: " + args[0]);
